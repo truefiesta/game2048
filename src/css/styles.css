@@ -1,0 +1,23 @@
+@import '~normalize.css';
+@import 'roboto.css';
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.game {
+    width: 650px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.board {
+    background-color: lightgrey;
+    border-radius: 10px;
+    width: 600px;
+    height: 600px;
+}
