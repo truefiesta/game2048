@@ -1,5 +1,5 @@
 import Tile from "../tile/tile";
-import {getRandomMatrixElementCoordinates, generateRandomTileValue, turnMartixRight, turnMatrixLeft, moveAndMergeValues} from "./utils";
+import {getRandomMatrixElementCoordinates, generateRandomTileValue, turnMartixRight, turnMatrixLeft, moveAndMergeValues, getRandomInt} from "./utils";
 
 const BoardSize = {
     SMALL_BOARD: 8,
@@ -57,6 +57,20 @@ class Board {
         this._matrix[column].forEach((tile, index) => {
             tile.setValue(values[index]);
         });
+    }
+
+    setValueOnRandomEmptyTile(value) {
+        const emptyTiles = [];
+        this._matrix.forEach((column) => {
+            column.forEach((tile) => {
+                if (tile.isEmpty()) {
+                    emptyTiles.push(tile);
+                }
+            });
+        });
+ 
+        const randomIndex = getRandomInt(emptyTiles.length);
+        emptyTiles[randomIndex].setValue(value);
     }
 
     moveTiles(direction) {

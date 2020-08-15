@@ -166,4 +166,27 @@ describe(`Board class`, () => {
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
+
+    it(`sets a given value on a random empty tile `, () => {
+        const calcMatrixSum = (matrix) => {
+            return matrix.reduce((acc, column) => {
+                return acc + column.reduce((sum, value) => {
+                    return sum + value;
+                }, 0)
+            }, 0);
+        };
+
+        const initialMatrix = [
+            [4, 0, 0, 2],
+            [0, 0, 2, 2],
+            [2, 4, 2, 2],
+            [2, 0, 2, 2]
+        ];
+        const initialMatrixSum = calcMatrixSum(initialMatrix);
+        const newTileValue = 2;
+        board.setMatrix(initialMatrix);
+        board.setValueOnRandomEmptyTile(newTileValue);
+        const finalMatrixSum = calcMatrixSum(board.getMatrix());
+        expect(finalMatrixSum).toEqual(initialMatrixSum + newTileValue);
+    });
 });

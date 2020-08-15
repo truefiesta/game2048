@@ -67,3 +67,7 @@ export const turnMatrixLeft = (matrix) => {
 
     return turnedMatrix;
 };
+
+export const getRandomInt = (max) => {
+    return Math.floor(Math.random() * Math.floor(max));
+};
