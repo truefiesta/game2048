@@ -46,6 +46,17 @@ const moveArrayValues = (values) => {
     return newValues;
 };
 
+const moveAndMergeValues = (values) => {
+    const movedValues = moveArrayValues(values);
+    for (let i = movedValues.length-1; i > 0; i--) {
+        if (movedValues[i] === movedValues[i - 1]) {
+            movedValues[i] = movedValues[i] * 2;
+            movedValues[i - 1] = 0;
+        }
+    }
+    return moveArrayValues(movedValues);
+}
+
 const turnMartixRight = (matrix) => {
     const turnedMatrix = [];
     const size = matrix.length;
@@ -121,26 +132,26 @@ class Board {
         const initialMatrix = this.getMatrix();
         let newMatrix = [];
         if (direction === Move.DOWN) {
-            newMatrix = initialMatrix.map((column) => moveArrayValues(column));
+            newMatrix = initialMatrix.map((column) => moveAndMergeValues(column));
         }
 
         if (direction === Move.UP) {
             newMatrix = initialMatrix.map((column) => {
                 const reversedColumn = Array.from(column).reverse();
-                const columnWithMovedValues = moveArrayValues(reversedColumn);
+                const columnWithMovedValues = moveAndMergeValues(reversedColumn);
                 return columnWithMovedValues.reverse();
             });
         }
 
         if (direction === Move.RIGHT) {
             const matrixTurnedRight = turnMartixRight(initialMatrix);
-            const matrixTurnedRightWithMovedValues = matrixTurnedRight.map((column) => moveArrayValues(column));
+            const matrixTurnedRightWithMovedValues = matrixTurnedRight.map((column) => moveAndMergeValues(column));
             newMatrix = turnMatrixLeft(matrixTurnedRightWithMovedValues);
         }
 
         if (direction === Move.LEFT) {
             const matrixTurnedLeft = turnMatrixLeft(initialMatrix);
-            const matrixTurnedLeftWithMovedValues = matrixTurnedLeft.map((column) => moveArrayValues(column));
+            const matrixTurnedLeftWithMovedValues = matrixTurnedLeft.map((column) => moveAndMergeValues(column));
             newMatrix = turnMartixRight(matrixTurnedLeftWithMovedValues);
         }
 
@@ -204,5 +215,5 @@ class Board {
 
 }
 
-export {BoardSize, BoardSizeToInitialFilledTilesNumber, generateRandomTileValue, Move, moveArrayValues, turnMartixRight, turnMatrixLeft};
+export {BoardSize, BoardSizeToInitialFilledTilesNumber, generateRandomTileValue, Move, moveArrayValues, turnMartixRight, turnMatrixLeft, moveAndMergeValues};
 export default Board;

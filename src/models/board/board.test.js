@@ -1,4 +1,4 @@
-import Board, {BoardSize, BoardSizeToInitialFilledTilesNumber, generateRandomTileValue, Move, moveArrayValues, turnMartixRight, turnMatrixLeft} from "./board";
+import Board, {BoardSize, BoardSizeToInitialFilledTilesNumber, generateRandomTileValue, Move, moveArrayValues, turnMartixRight, turnMatrixLeft, moveAndMergeValues} from "./board";
 
 describe(`Board class`, () => {
     const size = 4;
@@ -33,6 +33,24 @@ describe(`Board class`, () => {
             board.moveTiles(Move.DOWN);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
+
+        it(`moves non-bottom tiles to the bottom and merges values`, () => {
+            const initialMatrix = [
+                [4, 0, 0, 0],
+                [2, 2, 2, 2],
+                [4, 4, 4, 0],
+                [8, 0, 8, 0]
+            ];
+            const finalMatrix = [
+                [0, 0, 0, 4],
+                [0, 0, 4, 4],
+                [0, 0, 4, 8],
+                [0, 0, 0, 16]
+            ];
+            board.setMatrix(initialMatrix);
+            board.moveTiles(Move.DOWN);
+            expect(board.getMatrix()).toEqual(finalMatrix);
+        });
     });
 
     describe(`move up`, () => {
@@ -48,6 +66,24 @@ describe(`Board class`, () => {
                 [4, 2, 0, 0],
                 [2, 8, 0, 0],
                 [8, 2, 0, 0]
+            ];
+            board.setMatrix(initialMatrix);
+            board.moveTiles(Move.UP);
+            expect(board.getMatrix()).toEqual(finalMatrix);
+        });
+
+        it(`moves non-top tiles to the top and merges values`, () => {
+            const initialMatrix = [
+                [4, 4, 0, 2],
+                [0, 2, 8, 2],
+                [0, 0, 4, 0],
+                [2, 0, 2, 2]
+            ];
+            const finalMatrix = [
+                [8, 2, 0, 0],
+                [2, 8, 2, 0],
+                [4, 0, 0, 0],
+                [4, 2, 0, 0]
             ];
             board.setMatrix(initialMatrix);
             board.moveTiles(Move.UP);
@@ -73,6 +109,24 @@ describe(`Board class`, () => {
             board.moveTiles(Move.RIGHT);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
+
+        it(`moves tiles to the right and merges values`, () => {
+            const initialMatrix = [
+                [0, 2, 4, 0],
+                [2, 4, 4, 2],
+                [0, 2, 0, 0],
+                [2, 2, 4, 0]
+            ];
+            const finalMatrix = [
+                [0, 0, 0, 0],
+                [0, 2, 0, 0],
+                [0, 4, 4, 0],
+                [4, 4, 8, 2]
+            ];
+            board.setMatrix(initialMatrix);
+            board.moveTiles(Move.RIGHT);
+            expect(board.getMatrix()).toEqual(finalMatrix);
+        });
     });
 
     describe(`move left`, () => {
@@ -87,6 +141,24 @@ describe(`Board class`, () => {
                 [4, 2, 7, 8],
                 [0, 5, 2, 0],
                 [0, 8, 0, 0],
+                [0, 0, 0, 0]
+            ];
+            board.setMatrix(initialMatrix);
+            board.moveTiles(Move.LEFT);
+            expect(board.getMatrix()).toEqual(finalMatrix);
+        });
+
+        it(`moves tiles to the left and merges values`, () => {
+            const initialMatrix = [
+                [4, 0, 0, 2],
+                [0, 0, 2, 2],
+                [2, 4, 2, 2],
+                [2, 0, 2, 2]
+            ];
+            const finalMatrix = [
+                [4, 4, 4, 4],
+                [4, 0, 2, 4],
+                [0, 0, 0, 0],
                 [0, 0, 0, 0]
             ];
             board.setMatrix(initialMatrix);
@@ -119,6 +191,39 @@ describe(`moveArrayValues`, () => {
 
     it(`doesn't move four tiles`, () => {
         expect(moveArrayValues([2, 4, 2, 8])).toEqual([2, 4, 2, 8]);
+    });
+
+    it(`moves and merges tiles into one tile at the bottom case one`, () => {
+        expect(moveAndMergeValues([2, 2, 0, 0])).toEqual([0, 0, 0, 4]);
+    });
+
+    it(`moves and merges tiles into one tile at the bottom case two`, () => {
+        expect(moveAndMergeValues([2, 0, 0, 2])).toEqual([0, 0, 0, 4]);
+    });
+
+    it(`moves a non-bot
+    tom tile and merges it the the bottom tile`, () => {
+        expect(moveAndMergeValues([0, 2, 0, 2])).toEqual([0, 0, 0, 4]);
+    });
+
+    it(`moves three non-bottom tiles and merges two of them into one tile at the bottom`, () => {
+        expect(moveAndMergeValues([2, 2, 2, 0])).toEqual([0, 0, 2, 4]);
+    });
+
+    it(`merges four tiles into a pair of tile an moves them to the bottom`, () => {
+        expect(moveAndMergeValues([4, 4, 4, 4])).toEqual([0, 0, 8, 8]);
+    });
+
+    it(`merges two tiles at the bottom`, () => {
+        expect(moveAndMergeValues([0, 0, 8, 8])).toEqual([0, 0, 0, 16]);
+    });
+
+    it(`merges two tiles in the middle and moves all tiles to the bottom case one`, () => {
+        expect(moveAndMergeValues([8, 2, 2, 8])).toEqual([0, 8, 4, 8]);
+    });
+
+    it(`merges two tiles in the middle and moves all tiles to the bottom case two`, () => {
+        expect(moveAndMergeValues([4, 4, 0, 4])).toEqual([0, 0, 4, 8]);
     });
 });
 
