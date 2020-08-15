@@ -33,21 +33,47 @@ const generateRandomTileValue = (step) => {
     }
 };
 
-const moveColumnTiles = (column, direction) => {
-    const newColumn = Array.from(Array(column.length), () => new Tile());
-
-    if (direction === Move.DOWN) {
-        console.log(`down down down`);
-        let nextIndexInNewColumn = column.length - 1;
-        for (let i = column.length - 1; i >= 0; i--) { 
-            if (!column[i].isEmpty()) {
-                newColumn[nextIndexInNewColumn] = column[i];
-                nextIndexInNewColumn--;
-            }
+const moveArrayValues = (values) => {
+    const newValues = Array(values.length).fill(0);
+    let nextIndexInNewValues = values.length - 1;
+    for (let i = values.length - 1; i >= 0; i--) { 
+        if (!(values[i] === 0)) {
+            newValues[nextIndexInNewValues] = values[i];
+            nextIndexInNewValues--;
         }
     }
 
-    return newColumn;
+    return newValues;
+};
+
+const turnMartixRight = (matrix) => {
+    const turnedMatrix = [];
+    const size = matrix.length;
+
+    for (let j = 0; j < size; j++) {
+        turnedMatrix[j] = [];
+        let z = size - 1 - j;
+        for (let i = 0; i < size; i++) {
+            turnedMatrix[j][i] = matrix[i][z];
+        }
+    }
+
+    return turnedMatrix;
+};
+
+const turnMatrixLeft = (matrix) => {
+    const size = matrix.length;
+    const turnedMatrix = [];
+
+    for (let j = 0; j < size; j++) {
+    turnedMatrix[j] = [];
+    for (let i = 0; i < size; i++) {
+        let z = size - 1 - i;
+        turnedMatrix[j][i] = matrix[z][j]
+        }
+    }
+
+    return turnedMatrix;
 };
 
 class Board {
@@ -57,10 +83,32 @@ class Board {
         this._init();
     }
 
+    getMatrix() {
+        return this._matrix.map((_, i) => {
+            return this.getColumn(i);
+        })
+    }
+
     getColumn(column) {
         return this._matrix[column].map((tile) => {
             return tile.getValue();
         });
+    }
+
+    setMatrix(values) {
+        if (this._size !== values.length) {
+            throw `Wrong number of columns: ${values.length}`;
+        } else {
+            for (let i = 0; i < values.length; i++) {
+                if (values[i].length !== this._size) {
+                    throw `Wrong number of rows in column${i}: ${values[i].length}`;
+                }
+            }
+        }
+
+        for (let i = 0; i < this._matrix.length; i++) {
+            this.setColumn(i, values[i]);
+        }
     }
 
     setColumn(column, values) {
@@ -70,11 +118,33 @@ class Board {
     }
 
     moveTiles(direction) {
+        const initialMatrix = this.getMatrix();
+        let newMatrix = [];
         if (direction === Move.DOWN) {
-            this._matrix.forEach((column, i) => {
-                this._matrix[i] = moveColumnTiles(column, direction);
-            })
+            newMatrix = initialMatrix.map((column) => moveArrayValues(column));
         }
+
+        if (direction === Move.UP) {
+            newMatrix = initialMatrix.map((column) => {
+                const reversedColumn = Array.from(column).reverse();
+                const columnWithMovedValues = moveArrayValues(reversedColumn);
+                return columnWithMovedValues.reverse();
+            });
+        }
+
+        if (direction === Move.RIGHT) {
+            const matrixTurnedRight = turnMartixRight(initialMatrix);
+            const matrixTurnedRightWithMovedValues = matrixTurnedRight.map((column) => moveArrayValues(column));
+            newMatrix = turnMatrixLeft(matrixTurnedRightWithMovedValues);
+        }
+
+        if (direction === Move.LEFT) {
+            const matrixTurnedLeft = turnMatrixLeft(initialMatrix);
+            const matrixTurnedLeftWithMovedValues = matrixTurnedLeft.map((column) => moveArrayValues(column));
+            newMatrix = turnMartixRight(matrixTurnedLeftWithMovedValues);
+        }
+
+        this.setMatrix(newMatrix);
     }
 
     getSize() {
@@ -134,5 +204,5 @@ class Board {
 
 }
 
-export {BoardSize, BoardSizeToInitialFilledTilesNumber, generateRandomTileValue, Move};
+export {BoardSize, BoardSizeToInitialFilledTilesNumber, generateRandomTileValue, Move, moveArrayValues, turnMartixRight, turnMatrixLeft};
 export default Board;
