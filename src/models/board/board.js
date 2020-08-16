@@ -71,31 +71,48 @@ class Board {
     moveTiles(direction) {
         const initialMatrix = this.getMatrix();
         let newMatrix = [];
+        let mergedTilesSum = 0;
         if (direction === Move.DOWN) {
-            newMatrix = initialMatrix.map((column) => moveAndMergeValues(column));
+            newMatrix = initialMatrix.map((column) => {
+                const mergeResult = moveAndMergeValues(column);
+                mergedTilesSum += mergeResult[1];
+                return mergeResult[0];
+            });
         }
 
         if (direction === Move.UP) {
             newMatrix = initialMatrix.map((column) => {
                 const reversedColumn = Array.from(column).reverse();
-                const columnWithMovedValues = moveAndMergeValues(reversedColumn);
+                const mergeResult = moveAndMergeValues(reversedColumn);
+                const columnWithMovedValues = mergeResult[0];
+                mergedTilesSum += mergeResult[1];
                 return columnWithMovedValues.reverse();
             });
         }
 
         if (direction === Move.RIGHT) {
             const matrixTurnedRight = turnMartixRight(initialMatrix);
-            const matrixTurnedRightWithMovedValues = matrixTurnedRight.map((column) => moveAndMergeValues(column));
+            const matrixTurnedRightWithMovedValues = matrixTurnedRight.map((column) => {
+                const mergeResult = moveAndMergeValues(column)
+                mergedTilesSum += mergeResult[1];
+                return mergeResult[0];
+            });
             newMatrix = turnMatrixLeft(matrixTurnedRightWithMovedValues);
         }
 
         if (direction === Move.LEFT) {
             const matrixTurnedLeft = turnMatrixLeft(initialMatrix);
-            const matrixTurnedLeftWithMovedValues = matrixTurnedLeft.map((column) => moveAndMergeValues(column));
+            const matrixTurnedLeftWithMovedValues = matrixTurnedLeft.map((column) => {
+                const mergeResult = moveAndMergeValues(column);
+                mergedTilesSum += mergeResult[1];
+                return mergeResult[0];
+            });
             newMatrix = turnMartixRight(matrixTurnedLeftWithMovedValues);
         }
 
         this.setMatrix(newMatrix);
+
+        return mergedTilesSum;
     }
 
     getSize() {

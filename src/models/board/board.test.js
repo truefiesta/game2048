@@ -1,10 +1,14 @@
-import Board, {BoardSize, BoardSizeToInitialFilledTilesNumber, Move} from "./board";
+import Board from "./board";
+import {BoardSize, BoardSizeToInitialFilledTilesNumber} from "../game/game";
+import {calcMatrixSum} from "./utils";
+import {Move} from "../../const";
 
 describe(`Board class`, () => {
     const size = 4;
+    const initialValues = [2, 4];
     let board;
     beforeEach(() => {
-        board = new Board(size);
+        board = new Board(size, initialValues);
     })
 
     it(`can create a board with a given size`, () => {
@@ -48,7 +52,8 @@ describe(`Board class`, () => {
                 [0, 0, 0, 16]
             ];
             board.setMatrix(initialMatrix);
-            board.moveTiles(Move.DOWN);
+            const mergeResultSum = board.moveTiles(Move.DOWN);
+            expect(mergeResultSum).toEqual(32);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -86,7 +91,8 @@ describe(`Board class`, () => {
                 [4, 2, 0, 0]
             ];
             board.setMatrix(initialMatrix);
-            board.moveTiles(Move.UP);
+            const mergeResultSum = board.moveTiles(Move.UP);
+            expect(mergeResultSum).toEqual(12);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -124,7 +130,8 @@ describe(`Board class`, () => {
                 [4, 4, 8, 2]
             ];
             board.setMatrix(initialMatrix);
-            board.moveTiles(Move.RIGHT);
+            const mergeResultSum = board.moveTiles(Move.RIGHT);
+            expect(mergeResultSum).toEqual(16);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -162,7 +169,8 @@ describe(`Board class`, () => {
                 [0, 0, 0, 0]
             ];
             board.setMatrix(initialMatrix);
-            board.moveTiles(Move.LEFT);
+            const mergeResultSum =  board.moveTiles(Move.LEFT);
+            expect(mergeResultSum).toEqual(16);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });

@@ -26,46 +26,43 @@ describe(`moveArrayValues`, () => {
     });
 
     it(`moves and merges tiles into one tile at the bottom case one`, () => {
-        expect(moveAndMergeValues([2, 2, 0, 0])).toEqual([0, 0, 0, 4]);
+        const mergeResult = moveAndMergeValues([2, 2, 0, 0]);
+        expect(mergeResult[0]).toEqual([0, 0, 0, 4]);
     });
 
     it(`moves and merges tiles into one tile at the bottom case two`, () => {
-        expect(moveAndMergeValues([2, 0, 0, 2])).toEqual([0, 0, 0, 4]);
+        const mergeResult = moveAndMergeValues([2, 0, 0, 2]);
+        expect(mergeResult[0]).toEqual([0, 0, 0, 4]);
     });
 
     it(`moves a non-bottom tile and merges it the the bottom tile`, () => {
-        expect(moveAndMergeValues([0, 2, 0, 2])).toEqual([0, 0, 0, 4]);
+        const mergeResult = moveAndMergeValues([0, 2, 0, 2]);
+        expect(mergeResult[0]).toEqual([0, 0, 0, 4]);
     });
 
     it(`moves three non-bottom tiles and merges two of them into one tile at the bottom`, () => {
-        expect(moveAndMergeValues([2, 2, 2, 0])).toEqual([0, 0, 2, 4]);
+        const mergeResult = moveAndMergeValues([2, 2, 2, 0]);
+        expect(mergeResult[0]).toEqual([0, 0, 2, 4]);
     });
 
     it(`merges four tiles into a pair of tile an moves them to the bottom`, () => {
-        expect(moveAndMergeValues([4, 4, 4, 4])).toEqual([0, 0, 8, 8]);
+        const mergeResult = moveAndMergeValues([4, 4, 4, 4]);
+        expect(mergeResult[0]).toEqual([0, 0, 8, 8]);
     });
 
     it(`merges two tiles at the bottom`, () => {
-        expect(moveAndMergeValues([0, 0, 8, 8])).toEqual([0, 0, 0, 16]);
+        const mergeResult = moveAndMergeValues([0, 0, 8, 8]);
+        expect(mergeResult[0]).toEqual([0, 0, 0, 16]);
     });
 
     it(`merges two tiles in the middle and moves all tiles to the bottom case one`, () => {
-        expect(moveAndMergeValues([8, 2, 2, 8])).toEqual([0, 8, 4, 8]);
+        const mergeResult = moveAndMergeValues([8, 2, 2, 8]);
+        expect(mergeResult[0]).toEqual([0, 8, 4, 8]);
     });
 
     it(`merges two tiles in the middle and moves all tiles to the bottom case two`, () => {
-        expect(moveAndMergeValues([4, 4, 0, 4])).toEqual([0, 0, 4, 8]);
-    });
-});
-
-describe(`generateRandomTileValue`, () => {
-    it(`On the initial step generates 2 more often than 4`, () => {
-        const step = 0;
-        const randomNums = new Array(100).fill(generateRandomTileValue(step));
-        const countTwos = randomNums.filter((num) => num === 2).length;
-        const countFours = randomNums.filter((num) => num === 4).length;
-        expect(countTwos/countFours).toBeGreaterThan(2);
-        expect(countFours + countTwos).toEqual(100);
+        const mergeResult = moveAndMergeValues([4, 4, 0, 4]);
+        expect(mergeResult[0]).toEqual([0, 0, 4, 8]);
     });
 });
 

@@ -23,14 +23,16 @@ export const moveArrayValues = (values) => {
 
 export const moveAndMergeValues = (values) => {
     const movedValues = moveArrayValues(values);
+    let mergedTilesSum = 0;
     for (let i = movedValues.length-1; i > 0; i--) {
         if (movedValues[i] === movedValues[i - 1]) {
             movedValues[i] = movedValues[i] * 2;
+            mergedTilesSum += movedValues[i];
             movedValues[i - 1] = 0;
         }
     }
-    return moveArrayValues(movedValues);
-}
+    return [moveArrayValues(movedValues), mergedTilesSum];
+};
 
 export const turnMartixRight = (matrix) => {
     const turnedMatrix = [];
