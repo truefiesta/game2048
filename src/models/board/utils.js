@@ -8,12 +8,6 @@ export const getRandomMatrixElementCoordinates = (matrixSize) => {
     return {x, y};
 };
 
-export const generateRandomTileValue = (step) => {
-    if (step === 0) {
-        return Math.random() < 0.1 ? 4 : 2;
-    }
-};
-
 export const moveArrayValues = (values) => {
     const newValues = Array(values.length).fill(0);
     let nextIndexInNewValues = values.length - 1;
@@ -70,4 +64,11 @@ export const turnMatrixLeft = (matrix) => {
 
 export const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
+};
+export const calcMatrixSum = (matrix) => {
+    return matrix.reduce((acc, column) => {
+        return acc + column.reduce((sum, value) => {
+            return sum + value;
+        }, 0)
+    }, 0);
 };

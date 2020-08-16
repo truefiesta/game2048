@@ -168,14 +168,6 @@ describe(`Board class`, () => {
     });
 
     it(`sets a given value on a random empty tile `, () => {
-        const calcMatrixSum = (matrix) => {
-            return matrix.reduce((acc, column) => {
-                return acc + column.reduce((sum, value) => {
-                    return sum + value;
-                }, 0)
-            }, 0);
-        };
-
         const initialMatrix = [
             [4, 0, 0, 2],
             [0, 0, 2, 2],

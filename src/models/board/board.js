@@ -1,28 +1,23 @@
 import Tile from "../tile/tile";
-import {getRandomMatrixElementCoordinates, generateRandomTileValue, turnMartixRight, turnMatrixLeft, moveAndMergeValues, getRandomInt} from "./utils";
+import {getRandomMatrixElementCoordinates, turnMartixRight, turnMatrixLeft, moveAndMergeValues, getRandomInt, checkMergeAbility} from "./utils";
+import {Move} from "../../const";
 
-const BoardSize = {
-    SMALL_BOARD: 8,
-    MEDIUM_BOARD: 16
+const createInitialMatrix = (rows, cols = rows) => {
+    const matrix = [];
+    for (let i = 0; i < rows; i++) {
+        matrix[i] = [];
+        for (let j = 0; j < cols; j++) {
+            matrix[i][j] = new Tile();
+        }
+    }
+    
+    return matrix;
 };
-
-const BoardSizeToInitialFilledTilesNumber = {
-    [BoardSize.SMALL_BOARD]: 2,
-    [BoardSize.MEDIUM_BOARD]: 4
-};
-
-const Move = {
-    DOWN: `down`,
-    UP: `up`,
-    LEFT: `left`,
-    RIGHT: `right`,
-}
 
 class Board {
-    constructor(size) {
+    constructor(size, initialValues) {
         this._size = size;
-        this._matrix = this._createInitialMatrix(size);
-        this._init();
+        this._init(initialValues);
     }
 
     getMatrix() {
@@ -118,29 +113,6 @@ class Board {
         }
 
         return counter;
-    }
-
-    _createInitialMatrix(rows, cols = rows) {
-        const matrix = [];
-        for (let i = 0; i < rows; i++) {
-            matrix[i] = [];
-            for (let j = 0; j < cols; j++) {
-                matrix[i][j] = new Tile();
-            }
-        }
-        
-        return matrix;
-    }
-
-    _getTilesNumberForInitialFill() {
-        let numberOfTilesToFill;
-        if (this._size <= BoardSize.SMALL_BOARD) {
-            numberOfTilesToFill = BoardSizeToInitialFilledTilesNumber[BoardSize.SMALL_BOARD];
-        } else {
-            numberOfTilesToFill = BoardSizeToInitialFilledTilesNumber[BoardSize.MEDIUM_BOARD]
-        }
-
-        return numberOfTilesToFill;
     }
 
     _init() {
