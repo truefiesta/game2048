@@ -1,4 +1,11 @@
-import {generateRandomTileValue, moveArrayValues, turnMartixRight, turnMatrixLeft, moveAndMergeValues} from "./utils";
+import {
+    moveArrayValues,
+    turnMartixRight,
+    turnMatrixLeft,
+    moveAndMergeValues,
+    checkMergeAbilityInColumns,
+    checkMergeAbility
+} from "./utils";
 
 describe(`moveArrayValues`, () => {
     it(`moves a non-bottom tile to the very bottom`, () => {
@@ -107,3 +114,54 @@ describe(`turning functions`, () => {
         })
     });
 });
+
+describe(`functions that check merging ability`, () => {
+    const matrixOne = [
+        [1, 2, 2, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12],
+        [13, 14, 15, 16]
+    ];
+      
+    const matrixTwo = [
+        [1, 5, 9, 13],
+        [2, 6, 10, 14],
+        [4, 7, 11, 15],
+        [4, 8, 12, 16]
+    ];
+    
+    const matrixThree = [
+        [1, 5, 9, 13],
+        [2, 6, 10, 14],
+        [3, 7, 11, 15],
+        [4, 8, 12, 16]
+    ];
+
+    it(`checks if numbers in the matrix columns can be merged`, () => {
+        expect(checkMergeAbilityInColumns(matrixOne)).toEqual(true);
+        const turnedMatrixOne = turnMartixRight(matrixOne);
+        expect(checkMergeAbilityInColumns(turnedMatrixOne)).toEqual(false);
+        
+        expect(checkMergeAbilityInColumns(matrixTwo)).toEqual(false);
+        const turnedMatrixTwo = turnMartixRight(matrixTwo);
+        expect(checkMergeAbilityInColumns(turnedMatrixTwo)).toEqual(true);
+        
+        expect(checkMergeAbilityInColumns(matrixThree)).toEqual(false);
+        const turnedMatrixThree = turnMartixRight(matrixThree);
+        expect(checkMergeAbilityInColumns(turnedMatrixThree)).toEqual(false);
+    });
+
+    it(`checks if numbers in the matrix can be mergin in columns or in rows`, () => {
+        const initialMatrix = [
+            [1, 5, 9, 13],
+            [2, 2, 10, 14],
+            [3, 7, 11, 15],
+            [4, 8, 12, 16]
+        ];
+        expect(checkMergeAbility(initialMatrix)).toEqual(true);
+
+        expect(checkMergeAbility(matrixOne)).toEqual(true);
+        expect(checkMergeAbility(matrixTwo)).toEqual(true);
+        expect(checkMergeAbility(matrixThree)).toEqual(false);
+    });
+})

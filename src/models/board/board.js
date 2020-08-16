@@ -54,7 +54,7 @@ class Board {
         });
     }
 
-    setValueOnRandomEmptyTile(value) {
+    getEmptyTiles() {
         const emptyTiles = [];
         this._matrix.forEach((column) => {
             column.forEach((tile) => {
@@ -63,7 +63,19 @@ class Board {
                 }
             });
         });
- 
+        return emptyTiles;
+    }
+
+    hasEmptyTiles() {
+        return this.getEmptyTiles().length > 0;
+    }
+
+    hasTilesToMerge() {
+        return checkMergeAbility(this.getMatrix());
+    }
+
+    setValueOnRandomEmptyTile(value) {
+        const emptyTiles = this.getEmptyTiles();
         const randomIndex = getRandomInt(emptyTiles.length);
         emptyTiles[randomIndex].setValue(value);
     }
@@ -132,22 +144,20 @@ class Board {
         return counter;
     }
 
-    _init() {
+    _init(initialValues) {
+        this._matrix = createInitialMatrix(this._size);
         let counter = 0;
-        const step = 0;
-        const target = this._getTilesNumberForInitialFill();
+        const target = initialValues.length;
         while (counter < target) {
             const randomTileCoordinates = getRandomMatrixElementCoordinates(this._size);
             const {x, y} = randomTileCoordinates;
             const randomTile = this._matrix[x][y];
             if (randomTile.isEmpty()) {
+                randomTile.setValue(initialValues[counter]);
                 counter++;
-                randomTile.setValue(generateRandomTileValue(step));
             }
         }
     }
-
 }
 
-export {BoardSize, BoardSizeToInitialFilledTilesNumber, Move};
 export default Board;

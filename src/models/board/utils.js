@@ -67,6 +67,29 @@ export const turnMatrixLeft = (matrix) => {
 export const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
 };
+
+export const checkMergeAbilityInColumns = (initialMatrix) => {
+    const matrix = Array.from(initialMatrix);
+    let isAbleToMergeInColumns;
+    for (let i = 0; i < matrix.length; i++) {
+        let column = matrix[i];
+        isAbleToMergeInColumns = column.some((element, index, column) => {
+            if (index < column.length) {
+                return element === column[index + 1];
+            }
+        });
+        if (isAbleToMergeInColumns) {
+            return isAbleToMergeInColumns;
+        }
+    }
+    return isAbleToMergeInColumns;
+};
+
+export const checkMergeAbility = (matrix) => {
+    const turnedMatrix = turnMartixRight(matrix);
+    return checkMergeAbilityInColumns(matrix) || checkMergeAbilityInColumns(turnedMatrix);
+}
+
 export const calcMatrixSum = (matrix) => {
     return matrix.reduce((acc, column) => {
         return acc + column.reduce((sum, value) => {
