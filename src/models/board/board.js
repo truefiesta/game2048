@@ -70,6 +70,13 @@ class Board {
         return this.getEmptyTiles().length > 0;
     }
 
+    hasValue(value) {
+        const matrixWithValues = this.getMatrix();
+        return matrixWithValues.some((column) => {
+            return column.some((element) => element === value);
+        })
+    }
+
     hasTilesToMerge() {
         return checkMergeAbility(this.getMatrix());
     }

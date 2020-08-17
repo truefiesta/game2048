@@ -189,4 +189,18 @@ describe(`Board class`, () => {
         const finalMatrixSum = calcMatrixSum(board.getMatrix());
         expect(finalMatrixSum).toEqual(initialMatrixSum + newTileValue);
     });
+
+    it(`can check if it has a certain value`, () => {
+        const initialMatrix = [
+            [1, 2, 3, 0],
+            [4, 5, 0, 0],
+            [0, 0, 7, 8],
+            [0, 8, 2, 0]
+        ];
+        board.setMatrix(initialMatrix);
+        expect(board.hasValue(9)).toEqual(false);
+        expect(board.hasValue(0)).toEqual(true);
+        expect(board.hasValue(8)).toEqual(true);
+        expect(board.hasValue(7)).toEqual(true);
+    });
 });
