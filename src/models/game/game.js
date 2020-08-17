@@ -11,6 +11,8 @@ const BoardSizeToInitialFilledTilesNumber = {
     [BoardSize.MEDIUM_BOARD]: 4
 };
 
+const WINNING_VALUE = 2048;
+
 class Game {
     constructor(boardSize) {
         this._start(boardSize);
@@ -34,6 +36,10 @@ class Game {
 
     getBoardValues() {
         return this._board.getMatrix();
+    }
+
+    checkWin() {
+        return this._board.hasValue(WINNING_VALUE);
     }
 
     _updateScore(newPoints) {
