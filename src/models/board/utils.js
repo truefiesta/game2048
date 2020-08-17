@@ -70,19 +70,13 @@ export const getRandomInt = (max) => {
 
 export const checkMergeAbilityInColumns = (initialMatrix) => {
     const matrix = Array.from(initialMatrix);
-    let isAbleToMergeInColumns;
-    for (let i = 0; i < matrix.length; i++) {
-        let column = matrix[i];
-        isAbleToMergeInColumns = column.some((element, index, column) => {
-            if (index < column.length) {
+    return matrix.some((column) => {
+        return column.some((element, index) => {
+            if (index < column.length - 1) {
                 return element === column[index + 1];
             }
         });
-        if (isAbleToMergeInColumns) {
-            return isAbleToMergeInColumns;
-        }
-    }
-    return isAbleToMergeInColumns;
+    });
 };
 
 export const checkMergeAbility = (matrix) => {
