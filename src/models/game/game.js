@@ -46,23 +46,21 @@ class Game {
         this._score += newPoints;
     }
 
-    moveTiles(direction) {
-        if (this._board) {
+    move(direction) {
+        if (this._board.hasEmptyTiles()) {
+            const {mergedTilesSum} = this._board.moveTiles(direction);
+            this._updateScore(mergedTilesSum);
+            const newValueForEmptyTile = generateRandomTileValue(this._step);
+            this._board.setValueOnRandomEmptyTile(newValueForEmptyTile);
+        } else if (this._board.hasTilesToMerge()) {
+            const {mergedTilesSum} = this._board.moveTiles(direction);
+            this._updateScore(mergedTilesSum);
             if (this._board.hasEmptyTiles()) {
-                const points = this._board.moveTiles(direction);
-                this._updateScore(points);
                 const newValueForEmptyTile = generateRandomTileValue(this._step);
                 this._board.setValueOnRandomEmptyTile(newValueForEmptyTile);
-            } else if (this._board.hasTilesToMerge()) {
-                const points = this._board.moveTiles(direction);
-                this._updateScore(points);
-                if (this._board.hasEmptyTiles()) {
-                    const newValueForEmptyTile = generateRandomTileValue(this._step);
-                    this._board.setValueOnRandomEmptyTile(newValueForEmptyTile);
-                }
-            } else {
-                this._end();
             }
+        } else {
+            this._end();
         }
     }
 

@@ -52,8 +52,8 @@ describe(`Board class`, () => {
                 [0, 0, 0, 16]
             ];
             board.setMatrix(initialMatrix);
-            const mergeResultSum = board.moveTiles(Move.DOWN);
-            expect(mergeResultSum).toEqual(32);
+            const {mergedTilesSum} = board.moveTiles(Move.DOWN);
+            expect(mergedTilesSum).toEqual(32);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -91,8 +91,8 @@ describe(`Board class`, () => {
                 [4, 2, 0, 0]
             ];
             board.setMatrix(initialMatrix);
-            const mergeResultSum = board.moveTiles(Move.UP);
-            expect(mergeResultSum).toEqual(12);
+            const {mergedTilesSum} = board.moveTiles(Move.UP);
+            expect(mergedTilesSum).toEqual(12);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -130,8 +130,8 @@ describe(`Board class`, () => {
                 [4, 4, 8, 2]
             ];
             board.setMatrix(initialMatrix);
-            const mergeResultSum = board.moveTiles(Move.RIGHT);
-            expect(mergeResultSum).toEqual(16);
+            const {mergedTilesSum} = board.moveTiles(Move.RIGHT);
+            expect(mergedTilesSum).toEqual(16);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -169,8 +169,8 @@ describe(`Board class`, () => {
                 [0, 0, 0, 0]
             ];
             board.setMatrix(initialMatrix);
-            const mergeResultSum =  board.moveTiles(Move.LEFT);
-            expect(mergeResultSum).toEqual(16);
+            const {mergedTilesSum} =  board.moveTiles(Move.LEFT);
+            expect(mergedTilesSum).toEqual(16);
             expect(board.getMatrix()).toEqual(finalMatrix);
         });
     });
@@ -202,5 +202,22 @@ describe(`Board class`, () => {
         expect(board.hasValue(0)).toEqual(true);
         expect(board.hasValue(8)).toEqual(true);
         expect(board.hasValue(7)).toEqual(true);
+    });
+
+    it(`can check if tiles position changed after a move`, () => {
+        const initialMatrix = [
+            [0, 0, 2, 4],
+            [0, 0, 0, 0],
+            [0, 0, 0, 8],
+            [0, 0, 2, 8]
+        ];
+        board.setMatrix(initialMatrix);
+        const moveDownResult = board.moveTiles(Move.DOWN);
+        expect(moveDownResult.isTilesPositionChanged).toEqual(false);
+        expect(moveDownResult.mergedTilesSum).toEqual(0);
+
+        const moveRightResult = board.moveTiles(Move.RIGHT);
+        expect(moveRightResult.isTilesPositionChanged).toEqual(true);
+        expect(moveRightResult.mergedTilesSum).toEqual(20);
     });
 });

@@ -4,7 +4,8 @@ import {
     turnMatrixLeft,
     moveAndMergeValues,
     checkMergeAbilityInColumns,
-    checkMergeAbility
+    checkMergeAbility,
+    isNotTheSameMatrix,
 } from "./utils";
 
 describe(`moveArrayValues`, () => {
@@ -163,5 +164,41 @@ describe(`functions that check merging ability`, () => {
         expect(checkMergeAbility(matrixOne)).toEqual(true);
         expect(checkMergeAbility(matrixTwo)).toEqual(true);
         expect(checkMergeAbility(matrixThree)).toEqual(false);
+    });
+
+    it(`checks if too matrix contain the same elements on the same positions or not`, () => {
+        const matrixOne = [
+            [0, 0, 2, 4],
+            [0, 0, 0, 2],
+            [0, 0, 0, 8],
+            [0, 0, 2, 8]
+        ];
+        
+        const matrixTwo = [
+            [0, 0, 2, 4],
+            [0, 0, 0, 2],
+            [0, 0, 0, 8],
+            [0, 0, 2, 8]
+        ];
+
+        const matrixThree = [
+            [0, 0, 2, 4],
+            [2, 0, 0, 0],
+            [0, 0, 0, 8],
+            [0, 0, 2, 8]
+        ];
+
+        const matrixFour = [
+            [0, 0, 2, 4],
+            [2, 0, 0, 2],
+            [0, 0, 0, 8],
+            [0, 0, 2, 8]
+        ];
+
+        expect(isNotTheSameMatrix(matrixOne, matrixTwo)).toEqual(false);
+        expect(isNotTheSameMatrix(matrixOne, matrixThree)).toEqual(true);
+        expect(isNotTheSameMatrix(matrixOne, matrixFour)).toEqual(true);
+        expect(isNotTheSameMatrix(matrixThree, matrixFour)).toEqual(true);
+        expect(isNotTheSameMatrix(matrixFour, matrixFour)).toEqual(false);
     });
 })

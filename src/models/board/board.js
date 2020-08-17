@@ -1,5 +1,5 @@
 import Tile from "../tile/tile";
-import {getRandomMatrixElementCoordinates, turnMartixRight, turnMatrixLeft, moveAndMergeValues, getRandomInt, checkMergeAbility} from "./utils";
+import {getRandomMatrixElementCoordinates, turnMartixRight, turnMatrixLeft, moveAndMergeValues, getRandomInt, checkMergeAbility, isNotTheSameMatrix} from "./utils";
 import {Move} from "../../const";
 
 const createInitialMatrix = (rows, cols = rows) => {
@@ -129,9 +129,10 @@ class Board {
             newMatrix = turnMartixRight(matrixTurnedLeftWithMovedValues);
         }
 
+        const isTilesPositionChanged = isNotTheSameMatrix(initialMatrix, newMatrix);
         this.setMatrix(newMatrix);
 
-        return mergedTilesSum;
+        return {isTilesPositionChanged, mergedTilesSum};
     }
 
     getSize() {

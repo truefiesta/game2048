@@ -91,3 +91,11 @@ export const calcMatrixSum = (matrix) => {
         }, 0)
     }, 0);
 };
+
+export const isNotTheSameMatrix = (matrixA, matrixB) => {
+    return matrixA.some((col, colIndex) => {
+        return col.some((_, elemIndex) => {
+            return matrixA[colIndex][elemIndex] !== matrixB[colIndex][elemIndex]
+        })
+    });
+};
