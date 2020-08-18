@@ -67,7 +67,9 @@ class Board {
     }
 
     hasEmptyTiles() {
-        return this.getEmptyTiles().length > 0;
+        return this._matrix.some((column) => {
+            return column.some((tile) => tile.isEmpty());
+        })
     }
 
     hasValue(value) {

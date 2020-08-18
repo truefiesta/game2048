@@ -26,6 +26,14 @@ class Game {
         return this._score;
     }
 
+    hasWin() {
+        return this._hasWin;
+    }
+
+    hasEnded() {
+        return this._hasEnded;
+    }
+
     setScore(newScore) {
         this._score = newScore;
     }
@@ -42,25 +50,33 @@ class Game {
         return this._board.hasValue(WINNING_VALUE);
     }
 
-    _updateScore(newPoints) {
+    _incScore(newPoints) {
         this._score += newPoints;
     }
 
+    _incStepByOne() {
+        this._step++;
+    }
+
+    _isNextMovePossible() {
+        return this._board.hasEmptyTiles() || this._board.hasTilesToMerge();
+    }
+
     move(direction) {
-        if (this._board.hasEmptyTiles()) {
-            const {mergedTilesSum} = this._board.moveTiles(direction);
-            this._updateScore(mergedTilesSum);
-            const newValueForEmptyTile = generateRandomTileValue(this._step);
-            this._board.setValueOnRandomEmptyTile(newValueForEmptyTile);
-        } else if (this._board.hasTilesToMerge()) {
-            const {mergedTilesSum} = this._board.moveTiles(direction);
-            this._updateScore(mergedTilesSum);
-            if (this._board.hasEmptyTiles()) {
+        if(!this._hasEnded) {
+            const {isTilesPositionChanged, mergedTilesSum} = this._board.moveTiles(direction);
+            if (isTilesPositionChanged) {
+                this._incScore(mergedTilesSum);
+                if (!this._hasWin) {
+                    this._hasWin = this._board.hasValue(WINNING_VALUE);
+                }
+                this._incStepByOne();
                 const newValueForEmptyTile = generateRandomTileValue(this._step);
                 this._board.setValueOnRandomEmptyTile(newValueForEmptyTile);
+                if (!this._isNextMovePossible()) {
+                    this._end();
+                }
             }
-        } else {
-            this._end();
         }
     }
 
@@ -91,13 +107,15 @@ class Game {
     }
 
     _start(boardSize) {
+        this._hasWin = false;
+        this._hasEnded = false;
         this._score = 0;
         this._step = 0;
         this._initializeBoard(boardSize);
     }
 
     _end() {
-
+        this._hasEnded = true;
     }
 }
 
