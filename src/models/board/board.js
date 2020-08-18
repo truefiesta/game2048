@@ -154,13 +154,20 @@ class Board {
         return counter;
     }
 
+    _getMaxTilesNumber() {
+        return this._size * this._size;
+    }
+
     _init(initialValues) {
         this._matrix = createInitialMatrix(this._size);
         let counter = 0;
         const target = initialValues.length;
+        if (target > this._getMaxTilesNumber()) {
+            throw `Too many initial values`;
+        }
+        
         while (counter < target) {
-            const randomTileCoordinates = getRandomMatrixElementCoordinates(this._size);
-            const {x, y} = randomTileCoordinates;
+            const {x, y} = getRandomMatrixElementCoordinates(this._size);
             const randomTile = this._matrix[x][y];
             if (randomTile.isEmpty()) {
                 randomTile.setValue(initialValues[counter]);

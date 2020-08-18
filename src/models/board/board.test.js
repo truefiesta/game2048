@@ -19,6 +19,12 @@ describe(`Board class`, () => {
         expect(board.countFilledTiles()).toEqual(BoardSizeToInitialFilledTilesNumber[BoardSize.SMALL_BOARD]);
     });
 
+    it(`does not allow to create a board with too many initial values`, () => {
+        expect(() => {
+            new Board(2, [0, 1, 2, 3, 4]);
+        }).toThrowError(/Too many/);
+    });
+
     describe(`move down`, () => {
         it(`moves non-bottom tiles to the bottom`, () => {
             const initialMatrix = [
