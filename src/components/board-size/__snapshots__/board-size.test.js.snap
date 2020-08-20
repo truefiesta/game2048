@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoardSize snapshot renders 1`] = `
+<div
+  className="board-size"
+>
+  <label
+    className="subsection-title"
+    htmlFor="size-select"
+  >
+    Board size: 
+  </label>
+  <select
+    className="size-select"
+    id="size-select"
+    name="size"
+  >
+    <option
+      value="4"
+    >
+      4 * 4
+    </option>
+    <option
+      value="8"
+    >
+      8 * 8
+    </option>
+  </select>
+</div>
+`;
