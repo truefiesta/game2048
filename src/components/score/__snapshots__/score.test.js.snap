@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Score snapshot renders with Best title 1`] = `
+<div
+  className="box"
+>
+  <h3
+    className="subsection-title"
+  >
+    Best
+     score: 
+  </h3>
+  <p
+    className="subsection-title game-score"
+  >
+    3408
+  </p>
+</div>
+`;
+
+exports[`Score snapshot renders with Game title 1`] = `
+<div
+  className="box"
+>
+  <h3
+    className="subsection-title"
+  >
+    Game
+     score: 
+  </h3>
+  <p
+    className="subsection-title game-score"
+  >
+    0
+  </p>
+</div>
+`;
