@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tile snapshot renders with 0 1`] = `
+<div
+  className="tile tile-0"
+>
+  <span>
+    0
+  </span>
+</div>
+`;
+
+exports[`Tile snapshot renders with 2048 1`] = `
+<div
+  className="tile tile-2048"
+>
+  <span>
+    2048
+  </span>
+</div>
+`;
