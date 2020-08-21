@@ -95,15 +95,15 @@ class Game {
         const numberOfTilesToFill = this._getNumberOfTilesForInitialFill();
         const initialNonEmptyTileValues = [];
         for (let i = 0; i < numberOfTilesToFill; i++) {
-            initialNonEmptyTileValues.push(generateRandomTileValue());
+            initialNonEmptyTileValues.push(generateRandomTileValue(this._step));
         }
 
         return initialNonEmptyTileValues;
     }
 
-    _initializeBoard(boardSize) {
+    _initializeBoard() {
         const initialNonEmptyTileValues = this._getInitialValuesForNonEmptyTiles();
-        this._board = new Board(boardSize, initialNonEmptyTileValues);
+        this._board = new Board(this._size, initialNonEmptyTileValues);
     }
 
     _start(boardSize) {
@@ -111,7 +111,8 @@ class Game {
         this._hasEnded = false;
         this._score = 0;
         this._step = 0;
-        this._initializeBoard(boardSize);
+        this._size = boardSize;
+        this._initializeBoard();
     }
 
     _end() {

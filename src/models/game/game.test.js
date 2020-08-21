@@ -20,6 +20,17 @@ describe(`Game class`, () => {
         expect(game.getScore()).toEqual(newScore);
     });
 
+    it(`starts a new game with two filled tiles`, () => {
+        const matrix = game.getBoardValues();
+        let counter = 0;
+        matrix.forEach((column) => {
+            column.forEach((elem) => {
+                if (elem !== 0) counter++;
+            })
+        });
+        expect(counter).toEqual(2);
+    });
+
     describe(`game process`, () => {
         it(`does not allow an invalid move`, () => {
             const initialMatrix = [
