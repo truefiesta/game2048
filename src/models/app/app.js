@@ -11,7 +11,14 @@ class App {
         if (!snapshot) {
             snapshot = defaultSnapshot;
         }
-        this._init(snapshot.boardSize, snapshot.bestScore);
+
+        this._boardSize = snapshot.boardSize;
+        this._bestScore = snapshot.bestScore;
+        this._game = new Game(this._boardSize);
+        if(snapshot.boardValues) {
+            this._game.setBoardValues(snapshot.boardValues);
+            this._game.setScore(snapshot.score || 0);
+        }
     }
 
     getBoardSize() {
@@ -24,6 +31,15 @@ class App {
 
     getGame() {
         return this._game;
+    }
+
+    getSnapshot() {
+        return {
+            score: this._game.getScore(),
+            bestScore: this._bestScore,
+            boardSize: this._boardSize,
+            boardValues: this._game.getBoardValues(),
+        }
     }
 
     _updateBestScore() {
@@ -54,12 +70,6 @@ class App {
     }
 
     resetGame() {
-        this._game = new Game(this._boardSize);
-    }
-
-    _init(boardSize, bestScore) {
-        this._boardSize = boardSize;
-        this._bestScore = bestScore;
         this._game = new Game(this._boardSize);
     }
 }

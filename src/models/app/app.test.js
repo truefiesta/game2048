@@ -12,6 +12,23 @@ describe(`App class`, () => {
         expect(app.getBestScore()).toEqual(defaultSnapshot.bestScore);
     });
 
+    it(`can restore App from a snapshot and get a snapshot`, () => {
+        const snapshot = {
+            score: 1234,
+            bestScore: 10000,
+            boardSize: 4,
+            boardValues:  [
+                [1, 5, 9, 13],
+                [2, 6, 10, 14],
+                [19, 17, 100, 15],
+                [20, 100, 16, 16]
+            ],
+        };
+
+        const appFromSnapshot = new App(snapshot);
+        expect(appFromSnapshot.getSnapshot()).toEqual(snapshot);
+    });
+
     it(`starts a new game when the app is created`, () => {
         expect(app.getGame()).toBeDefined();
     });
