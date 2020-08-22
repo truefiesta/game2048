@@ -15,7 +15,7 @@ class App {
         this._boardSize = snapshot.boardSize;
         this._bestScore = snapshot.bestScore;
         this._game = new Game(this._boardSize);
-        if(snapshot.boardValues) {
+        if(snapshot.boardValues && !snapshot.gameEnded) {
             this._game.setBoardValues(snapshot.boardValues);
             this._game.setScore(snapshot.score || 0);
         }
@@ -39,6 +39,7 @@ class App {
             bestScore: this._bestScore,
             boardSize: this._boardSize,
             boardValues: this._game.getBoardValues(),
+            gameEnded: this._game.hasEnded()
         }
     }
 

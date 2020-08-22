@@ -23,6 +23,7 @@ describe(`App class`, () => {
                 [19, 17, 100, 15],
                 [20, 100, 16, 16]
             ],
+            gameEnded: false
         };
 
         const appFromSnapshot = new App(snapshot);
