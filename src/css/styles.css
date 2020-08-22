@@ -288,3 +288,42 @@ body {
 .size-select::-ms-expand {
     display: none;
 }
+
+.game-over-container {
+    position: absolute;
+    z-index: 1;
+    width: 500px;
+    height: 1000px;
+    background-color: rgba(42, 46, 65, 0.8);
+    text-align: center;
+}
+
+.game-over-container h3 {
+    margin: 0;
+    margin-top: 280px;
+    font-size: 30px;
+    color: #fe595c;
+}
+
+.game-over-container span {
+    color: rgba(255, 255, 255, 1);
+}
+
+.game-over-container p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes moveDown {
+    from {top: 0}
+    to {top: 400px}
+}
+
+.game-over {
+    position: relative;
+    z-index: 2;
+    animation-name: moveDown;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+
