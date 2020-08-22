@@ -6,14 +6,11 @@ import NewGameButton from "../new-game-button/new-game-button";
 import Score from "../score/score";
 import {ScoreType} from "../../const";
 
-const defaultBoardSize = 4;
-// TODO: get from local storage;
-const bestScore = 0;
-
 class App extends Component {
     constructor(props) {
         super(props);
-        this._app = new AppModel(defaultBoardSize, bestScore);
+        this._app = new AppModel(JSON.parse(localStorage.getItem(`snapshot`)));
+
         this.state = {
             score: this._app.getGame().getScore(),
             bestScore: this._app.getBestScore(),
@@ -34,6 +31,7 @@ class App extends Component {
             bestScore: this._app.getBestScore(),
             boardValues: this._app.getGame().getBoardValues(),
         })
+        localStorage.setItem(`snapshot`, JSON.stringify(this._app.getSnapshot()));
     }
 
     _moveUp() {
