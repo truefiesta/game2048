@@ -1,9 +1,17 @@
 import Game from "../game/game";
 import {Move} from "../../const";
 
+const defaultSnapshot = {
+    bestScore: 0,
+    boardSize: 4,
+};
+
 class App {
-    constructor(boardSize, bestScore) {
-        this._init(boardSize, bestScore);
+    constructor(snapshot) {
+        if (!snapshot) {
+            snapshot = defaultSnapshot;
+        }
+        this._init(snapshot.boardSize, snapshot.bestScore);
     }
 
     getBoardSize() {
@@ -56,4 +64,5 @@ class App {
     }
 }
 
+export {defaultSnapshot};
 export default App;

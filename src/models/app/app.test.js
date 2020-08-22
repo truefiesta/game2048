@@ -1,17 +1,15 @@
-import App from "./app";
+import App, {defaultSnapshot} from "./app";
 
 describe(`App class`, () => {
     let app;
-    const boardSize = 4;
-    const bestScore = 0;
 
     beforeEach(() => {
-        app = new App(boardSize, bestScore);
+        app = new App();
     })
 
     it(`can create a new app`, () => {
-        expect(app.getBoardSize()).toEqual(boardSize);
-        expect(app.getBestScore()).toEqual(bestScore);
+        expect(app.getBoardSize()).toEqual(defaultSnapshot.boardSize);
+        expect(app.getBestScore()).toEqual(defaultSnapshot.bestScore);
     });
 
     it(`starts a new game when the app is created`, () => {
