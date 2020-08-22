@@ -3,6 +3,7 @@
 exports[`NewGameButton snapshot renders 1`] = `
 <button
   className="new-game-button"
+  onClick={[Function]}
 >
   New Game
 </button>

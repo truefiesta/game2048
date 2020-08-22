@@ -5,7 +5,9 @@ import NewGameButton from "./new-game-button";
 describe(`NewGameButton snapshot`, () => {
     it(`renders`, () => {
         const newGameButton = renderer.create(
-            <NewGameButton/>
+            <NewGameButton
+                onReset={() => null}
+            />
         )
         .toJSON();
 

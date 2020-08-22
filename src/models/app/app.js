@@ -70,6 +70,7 @@ class App {
     }
 
     resetGame() {
+        this._boardSize = 4;
         this._game = new Game(this._boardSize);
     }
 }
