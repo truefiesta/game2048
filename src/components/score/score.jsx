@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Score = ({title, points}) => {
+const Score = ({title, points, newPoints}) => {
+
     return (
     <div className="box">
         <h3 className="subsection-title">{title} score: </h3>
-        <p className="subsection-title game-score">{points}</p>
+        <p className="subsection-title game-score">
+            {points}
+            {newPoints && (<span key={Math.random()} className={newPoints > 0 ? `new-points` : `hide-new-points`}>{` + ${newPoints}`}</span>)}
+        </p>
     </div>
     )
 };
@@ -13,6 +17,7 @@ const Score = ({title, points}) => {
 Score.propTypes = {
     title: PropTypes.string.isRequired,
     points: PropTypes.number.isRequired,
+    newPoints: PropTypes.number
 };
 
 export default Score;

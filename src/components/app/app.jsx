@@ -79,6 +79,7 @@ class App extends Component {
                     <Score
                         title={ScoreType.GAME}
                         points={this.state.score}
+                        newPoints={this._app.getGame().getNewPoints()}
                     />
                     <Score
                         title={ScoreType.BEST}

@@ -9,6 +9,7 @@ describe(`Score snapshot`, () => {
             <Score
                 title={ScoreType.GAME}
                 points={0}
+                newPoints={0}
             />
         )
         .toJSON();

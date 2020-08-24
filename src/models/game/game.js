@@ -26,6 +26,10 @@ class Game {
         return this._score;
     }
 
+    getNewPoints() {
+        return this._newPoints;
+    }
+
     hasWin() {
         return this._hasWin;
     }
@@ -52,6 +56,7 @@ class Game {
 
     _incScore(newPoints) {
         this._score += newPoints;
+        this._newPoints = newPoints;
     }
 
     _incStepByOne() {
@@ -110,6 +115,7 @@ class Game {
         this._hasWin = false;
         this._hasEnded = false;
         this._score = 0;
+        this._newPoints = 0;
         this._step = 0;
         this._size = boardSize;
         this._initializeBoard();
