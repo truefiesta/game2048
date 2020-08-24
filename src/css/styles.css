@@ -187,6 +187,14 @@ body {
     padding-bottom: 20px;
 }
 
+.board-8 .tile {
+    width: 53px;
+    height: 53px;
+    font-size: 20px;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
 .tile-0 {
     background-color: #7b757b;
     color: rgba(42, 46, 65, 0.9);

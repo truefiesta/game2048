@@ -62,7 +62,7 @@ describe(`App class`, () => {
         app.moveDown();
         app.moveRight();
         expect(initialGame.getStep()).toBeGreaterThan(0);
-        app.resetGame();
+        app.resetGame(4);
         const newGame = app.getGame();
         expect(newGame).not.toEqual(initialGame);
         expect(newGame.getStep()).toEqual(0);

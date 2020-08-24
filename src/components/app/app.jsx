@@ -1,8 +1,7 @@
 import React, {Component, Fragment} from "react";
 import AppModel from "../../models/app/app";
-import BoardSize from "../board-size/board-size";
 import Board from "../board/board";
-import NewGameButton from "../new-game-button/new-game-button";
+import NewGame from "../new-game/new-game";
 import Score from "../score/score";
 import {ScoreType} from "../../const";
 import EndGameScreen from "../end-game-screen/end-game-screen";
@@ -16,6 +15,7 @@ class App extends Component {
             score: this._app.getGame().getScore(),
             bestScore: this._app.getBestScore(),
             boardValues: this._app.getGame().getBoardValues(),
+            boardSize: this._app.getBoardSize(),
         }
 
         this._actions = {
@@ -33,6 +33,7 @@ class App extends Component {
             score: this._app.getGame().getScore(),
             bestScore: this._app.getBestScore(),
             boardValues: this._app.getGame().getBoardValues(),
+            boardSize: this._app.getBoardSize(),
         })
         localStorage.setItem(`snapshot`, JSON.stringify(this._app.getSnapshot()));
     }
@@ -57,8 +58,8 @@ class App extends Component {
         this._updateState();
     }
 
-    _reset() {
-        this._app.resetGame();
+    _reset(boardSize) {
+        this._app.resetGame(boardSize);
         this._updateState();
     }
 
@@ -70,8 +71,8 @@ class App extends Component {
                     score={this.state.score}
                 />
                 <section className={`new-game-container ${this._app.getGame().hasEnded() ? `game-over` : ``} box`}>
-                    <BoardSize />
-                    <NewGameButton 
+                    <NewGame 
+                        defaultSize={this._app.getBoardSize()}
                         onReset={this._reset}
                     />
                 </section>
@@ -87,6 +88,7 @@ class App extends Component {
                     />
                 </section>
                 <Board
+                    size={this.state.boardSize}
                     matrix={this.state.boardValues}
                     actions={this._actions}
                 />

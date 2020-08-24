@@ -32,7 +32,6 @@ exports[`Score snapshot renders with Game title 1`] = `
     className="subsection-title game-score"
   >
     0
-    0
   </p>
 </div>
 `;

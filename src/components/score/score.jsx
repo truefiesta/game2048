@@ -8,7 +8,7 @@ const Score = ({title, points, newPoints}) => {
         <h3 className="subsection-title">{title} score: </h3>
         <p className="subsection-title game-score">
             {points}
-            {newPoints && (<span key={Math.random()} className={newPoints > 0 ? `new-points` : `hide-new-points`}>{` + ${newPoints}`}</span>)}
+            {newPoints > 0 && (<span key={Math.random()} className="new-points">{` + ${newPoints}`}</span>)}
         </p>
     </div>
     )

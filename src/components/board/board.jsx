@@ -2,7 +2,7 @@ import React, {useCallback, useEffect} from "react";
 import PropTypes from "prop-types";
 import Tile from "../tile/tile";
 
-const Board = ({matrix, actions}) => {
+const Board = ({size, matrix, actions}) => {
     const values = matrix.reduce((acc, curColumn) => {
         return acc.concat(curColumn);
     }, []);
@@ -34,7 +34,7 @@ const Board = ({matrix, actions}) => {
     }, [actions]);
 
     return (
-        <section className="board box">
+        <section className={`board board-${size} box`}>
             {values.map((value, i) => {
                 return <Tile key={i} value={value}/>
             })}
@@ -43,6 +43,7 @@ const Board = ({matrix, actions}) => {
 };
 
 Board.propTypes = {
+    size: PropTypes.number.isRequired,
     matrix: PropTypes.arrayOf(
         PropTypes.arrayOf(
             PropTypes.number.isRequired

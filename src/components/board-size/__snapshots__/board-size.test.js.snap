@@ -14,6 +14,8 @@ exports[`BoardSize snapshot renders 1`] = `
     className="size-select"
     id="size-select"
     name="size"
+    onChange={[Function]}
+    value={4}
   >
     <option
       value="4"

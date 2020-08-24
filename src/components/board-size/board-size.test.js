@@ -5,7 +5,10 @@ import BoardSize from "./board-size";
 describe(`BoardSize snapshot`, () => {
     it(`renders`, () => {
         const boardSize = renderer.create(
-            <BoardSize/>
+            <BoardSize
+                size={4}
+                onSelect={() => null}
+            />
         )
         .toJSON();
 

@@ -2,8 +2,8 @@ import {generateRandomTileValue} from "./utils";
 import Board from "../board/board";
 
 const BoardSize = {
-    SMALL_BOARD: 8,
-    MEDIUM_BOARD: 16
+    SMALL_BOARD: 4,
+    MEDIUM_BOARD: 8
 };
 
 const BoardSizeToInitialFilledTilesNumber = {

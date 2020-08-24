@@ -70,8 +70,8 @@ class App {
         this._move(Move.LEFT);
     }
 
-    resetGame() {
-        this._boardSize = 4;
+    resetGame(boardSize) {
+        this._boardSize = boardSize;
         this._game = new Game(this._boardSize);
     }
 }

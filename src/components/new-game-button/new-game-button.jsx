@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const NewGameButton = ({onReset}) => {
     return (
-        <button onClick={() => {onReset()}} className="new-game-button">New Game</button>
+        <button onClick={onReset} className="new-game-button">New Game</button>
     )
 };
 

@@ -13,6 +13,7 @@ describe(`Board snapshot`, () => {
         }
         const board = renderer.create(
             <Board
+                size={4}
                 matrix={matrix}
                 actions={actions}
             />

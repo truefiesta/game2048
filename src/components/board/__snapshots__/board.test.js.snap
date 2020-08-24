@@ -2,7 +2,7 @@
 
 exports[`Board snapshot renders 1`] = `
 <section
-  className="board box"
+  className="board board-4 box"
 >
   <div
     className="tile tile-0"
