@@ -1,14 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Board from "./components/board";
+import App from "./components/app/app";
 import './css/styles.css';
 
-console.log('Hi!');
-
-const App = () => {
-    return (
-        <Board/>
-    );
-};
-
-ReactDOM.render(<App />, document.getElementById('board'));
+ReactDOM.render(<App />, document.getElementById('game'));

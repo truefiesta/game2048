@@ -7,9 +7,33 @@
     <title>Game 2048</title>
 </head>
 <body>
-    <main class="game">
-        <h1>2048</h1>
-        <section id="board" class="board"></section>
+    <main class="game-container">
+        <header>
+            <h1 class="title">2<span>0</span>48</h1>
+            <p class="subtitle">Get the tile with a number 2048</p>
+        </header>
+        <section class="rules">
+            <h2 class="section-title">How to play: </h2>
+            <div class="section-text-container">
+                <p class="section-text">
+                    Press arrow keys to move tiles on the board.
+                </p>
+                <p class="section-text">
+                    When two tiles with the same number touch, they merge into
+                    one tile with a new number. 
+                </p>
+                <p class="section-text">
+                    The number of the newly formed
+                    tile is equal to the merged tiles original number multiplied 
+                    by two.
+                </p>
+            </div>
+        </section>
+        <section id="game"></section>
+        <section>
+            <h2 class="subsection-title">Disclaimer: </h2>
+            <p class="section-text">Please note, this game is for demonstration purpose only.</p>
+        </section>
     </main>
 </body>
 </html>

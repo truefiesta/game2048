@@ -4,3 +4,8 @@ export const Move = {
     LEFT: `left`,
     RIGHT: `right`,
 };
+
+export const ScoreType = {
+    GAME: `Game`,
+    BEST: `Best`,
+};

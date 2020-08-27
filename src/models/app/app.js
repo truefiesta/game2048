@@ -1,9 +1,24 @@
 import Game from "../game/game";
 import {Move} from "../../const";
 
+const defaultSnapshot = {
+    bestScore: 0,
+    boardSize: 4,
+};
+
 class App {
-    constructor(boardSize, bestScore) {
-        this._init(boardSize, bestScore);
+    constructor(snapshot) {
+        if (!snapshot) {
+            snapshot = defaultSnapshot;
+        }
+
+        this._boardSize = snapshot.boardSize;
+        this._bestScore = snapshot.bestScore;
+        this._game = new Game(this._boardSize);
+        if(snapshot.boardValues && !snapshot.gameEnded) {
+            this._game.setBoardValues(snapshot.boardValues);
+            this._game.setScore(snapshot.score || 0);
+        }
     }
 
     getBoardSize() {
@@ -16,6 +31,16 @@ class App {
 
     getGame() {
         return this._game;
+    }
+
+    getSnapshot() {
+        return {
+            score: this._game.getScore(),
+            bestScore: this._bestScore,
+            boardSize: this._boardSize,
+            boardValues: this._game.getBoardValues(),
+            gameEnded: this._game.hasEnded()
+        }
     }
 
     _updateBestScore() {
@@ -45,15 +70,11 @@ class App {
         this._move(Move.LEFT);
     }
 
-    resetGame() {
-        this._game = new Game(this._boardSize);
-    }
-
-    _init(boardSize, bestScore) {
+    resetGame(boardSize) {
         this._boardSize = boardSize;
-        this._bestScore = bestScore;
         this._game = new Game(this._boardSize);
     }
 }
 
+export {defaultSnapshot};
 export default App;

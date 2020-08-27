@@ -1,17 +1,33 @@
-import App from "./app";
+import App, {defaultSnapshot} from "./app";
 
 describe(`App class`, () => {
     let app;
-    const boardSize = 4;
-    const bestScore = 0;
 
     beforeEach(() => {
-        app = new App(boardSize, bestScore);
+        app = new App();
     })
 
     it(`can create a new app`, () => {
-        expect(app.getBoardSize()).toEqual(boardSize);
-        expect(app.getBestScore()).toEqual(bestScore);
+        expect(app.getBoardSize()).toEqual(defaultSnapshot.boardSize);
+        expect(app.getBestScore()).toEqual(defaultSnapshot.bestScore);
+    });
+
+    it(`can restore App from a snapshot and get a snapshot`, () => {
+        const snapshot = {
+            score: 1234,
+            bestScore: 10000,
+            boardSize: 4,
+            boardValues:  [
+                [1, 5, 9, 13],
+                [2, 6, 10, 14],
+                [19, 17, 100, 15],
+                [20, 100, 16, 16]
+            ],
+            gameEnded: false
+        };
+
+        const appFromSnapshot = new App(snapshot);
+        expect(appFromSnapshot.getSnapshot()).toEqual(snapshot);
     });
 
     it(`starts a new game when the app is created`, () => {
@@ -46,7 +62,7 @@ describe(`App class`, () => {
         app.moveDown();
         app.moveRight();
         expect(initialGame.getStep()).toBeGreaterThan(0);
-        app.resetGame();
+        app.resetGame(4);
         const newGame = app.getGame();
         expect(newGame).not.toEqual(initialGame);
         expect(newGame.getStep()).toEqual(0);

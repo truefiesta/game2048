@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/ico">
+    <title>Game 2048</title>
+</head>
+<body>
+    <main class="game-container">
+        <header>
+            <h1 class="title">2<span>0</span>48</h1>
+            <p class="subtitle">Get the tile with a number 2048</p>
+        </header>
+        <section class="rules">
+            <h2 class="section-title">How to play: </h2>
+            <div class="section-text-container">
+                <p class="section-text">
+                    Press arrow keys to move tiles on the board.
+                </p>
+                <p class="section-text">
+                    When two tiles with the same number touch, they merge into
+                    one tile with a new number. 
+                </p>
+                <p class="section-text">
+                    The number of the newly formed
+                    tile is equal to the merged tiles original number multiplied 
+                    by two.
+                </p>
+            </div>
+        </section>
+        <section id="game">
+            <section class="new-game-container box">
+                <div class="board-size">
+                    <label class="subsection-title" for="size-select">Board size: </label>
+                    <select name="size" id="size-select" class="size-select">
+                        <option value="4">4 * 4</option>
+                        <option value="8">8 * 8</option>
+                    </select>
+                </div>
+                <button class="new-game-button">New Game</button>
+            </section>
+            <section class="score">
+                <div class="box">
+                    <h3 class="subsection-title">Game score: </h3>
+                    <p class="subsection-title game-score">0</p>
+                </div>
+                <div class="box">
+                    <h3 class="subsection-title">Best score: </h3>
+                    <p class="subsection-title best-score">0</p>
+                </div>
+            </section>
+            <section class="board box">
+                <div class="tile tile-0">
+                    <span>0</span>
+                </div>
+                <div class="tile tile-2">
+                    <span>1</span>
+                </div>
+                <div class="tile tile-4">
+                    <span>2</span>
+                </div>
+                <div class="tile tile-8">
+                    <span>3</span>
+                </div>
+                <div class="tile tile-16">
+                    <span>4</span>
+                </div>
+                <div class="tile tile-2048">
+                    <span>2048</span>
+                </div>
+                <div class="tile tile-32">
+                    <span>6</span>
+                </div>
+                <div class="tile tile-64">
+                    <span>7</span>
+                </div>
+                <div class="tile tile-128">
+                    <span>8</span>
+                </div>
+                <div class="tile tile-256">
+                    <span>9</span>
+                </div>
+                <div class="tile tile-512">
+                    <span>10</span>
+                </div>
+                <div class="tile tile-1024">
+                    <span>11</span>
+                </div>
+                <div class="tile tile-0">
+                    <span>12</span>
+                </div>
+                <div class="tile tile-4096">
+                    <span>4096</span>
+                </div>
+                <div class="tile tile-0">
+                    <span>14</span>
+                </div>
+                <div class="tile tile-0">
+                    <span>15</span>
+                </div>
+            </section>
+            <div id="game-test"></div>
+        </section>
+        <section>
+            <h2 class="subsection-title">Disclaimer: </h2>
+            <p class="section-text">Please note, this game is for demonstation purpose only.</p>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,23 +1,357 @@
 @import '~normalize.css';
 @import 'roboto.css';
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(42, 46, 65, 1);
 }
 
-h1 {
-    text-align: center;
-}
-
-.game {
-    width: 650px;
+.game-container {
+    width: 530px;
     height: 100%;
+    padding: 0 15px;
     margin: 0 auto;
 }
 
-.board {
-    background-color: lightgrey;
-    border-radius: 10px;
-    width: 600px;
-    height: 600px;
+.title {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 60px;
+    color: #ffd84c;
+    text-align: center;
+    margin-bottom: 10px;
 }
+
+.title span {
+    position: relative;
+}
+
+.title span::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 1px;
+    width: 31px;
+    height: 23px;
+    background-image: url(../img/crown.svg);
+    background-size: 31px 23px;
+    background-repeat: no-repeat;
+}
+
+.subtitle {
+    line-height: 16px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+.rules {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    min-width: 136px;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.section-text {
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.4px;
+    margin: 10px 0;
+}
+
+.box {
+    background-color: rgba(71, 70, 83, 1);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.new-game-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.subsection-title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.board-size {
+    width: 228px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.new-game-button {
+    width: 228px;
+    border: none;
+    border-radius: 2px;
+    background-color: #fe595c;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.7px;
+    padding: 10px;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+.score div {
+    width: 243px;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 15px;
+}
+
+.score p {
+    min-width: 107px;
+    text-align: center;
+    position: relative;
+}
+
+@keyframes pointsUp {
+    0% {top: 5px; opacity: 0;}
+    10% {top: 0; opacity: 0.5;}
+    100% {top: -10px; opacity: 0;}
+}
+
+.hide-new-points {
+    display: none;
+}
+
+.new-points {
+    position: absolute;
+    opacity: 0;
+    right: 5px;
+    animation-name: pointsUp;
+    animation-duration: 1s;
+    animation-fill-mode: none;
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.tile {
+    border-radius: 2px;
+    width: 107px;
+    height: 107px;
+    font-weight: 900;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.board-8 .tile {
+    width: 53px;
+    height: 53px;
+    font-size: 20px;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
+.tile-0 {
+    background-color: #7b757b;
+    color: rgba(42, 46, 65, 0.9);
+}
+
+.tile-0 span{
+    display: none;
+}
+
+.tile-2 {
+    background-color: #eedad1;
+    color: rgba(42, 46, 65, 0.9);
+}
+
+.tile-4 {
+    background-color: #f7d8ad;
+    color: rgba(42, 46, 65, 0.9);
+}
+
+.tile-8 {
+    background-color: #b58381;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tile-16 {
+    background-color: #a96a66;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tile-32 {
+    background-color: #df9964;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tile-64 {
+    background-color: #fd9065;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tile-128 {
+    background-color: #feb859;
+    color: rgba(42, 46, 65, 0.9);
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.tile-256 {
+    background-color: #e66550;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.tile-512 {
+    background-color: #f39248;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.tile-1024 {
+    background-color: #f6a38f;
+    color: rgba(42, 46, 65, 0.9);
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.tile-2048 {
+    background-color: #fe595c;
+    color: #ffd84c;
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.tile-2048 span {
+    padding-top: 10px;
+    display: block;
+    position: relative;
+}
+
+.tile-2048 span::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 26px;
+    width: 30px;
+    height: 22px;
+    background-image: url(../img/crown.svg);
+    background-size: 30px 22px;
+    background-repeat: no-repeat;
+}
+
+.tile-4096 {
+    background-color: #2a2f41;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.size-select {
+    display: block;
+    border: none;
+    border-radius: 2px;
+    width: 117px;
+    padding: 10px 12px;
+    font-size: 16px;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 1);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: rgba(42, 46, 65, 1);
+    background-image: url('../img/select-arrow.svg');
+    background-size: .65em auto, 100%;
+    background-position: right .7em top 50%;
+    background-repeat: no-repeat;
+}
+
+.size-select::-ms-expand {
+    display: none;
+}
+
+.game-over-container {
+    position: absolute;
+    z-index: 1;
+    width: 500px;
+    height: 1000px;
+    background-color: rgba(42, 46, 65, 0.8);
+    text-align: center;
+}
+
+.game-over-container h3 {
+    margin: 0;
+    margin-top: 280px;
+    font-size: 30px;
+    color: #fe595c;
+}
+
+.game-over-container span {
+    color: rgba(255, 255, 255, 1);
+}
+
+.game-over-container p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes moveDown {
+    from {top: 0}
+    to {top: 400px}
+}
+
+.game-over {
+    position: relative;
+    z-index: 2;
+    animation-name: moveDown;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+
